@@ -1,71 +1,95 @@
-import { experiences } from '../assets/assets';
-import {
-  FaBriefcase,
-  FaBuilding,
-  FaCalendarAlt,
-  FaHome,
-  FaHandshake,
-  FaGraduationCap,
-} from 'react-icons/fa';
-
-const roleIcon = (type) => {
-  switch ((type || '').toLowerCase()) {
-    case 'internship':
-    case 'stage':
-      return FaGraduationCap;
-    case 'contract':
-    case 'freelance':
-      return FaHandshake;
-    case 'remote':
-      return FaHome;
-    case 'full-time':
-    default:
-      return FaBriefcase;
-  }
-};
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
 
 export default function Experience() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -30, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: 'easeOut',
+      },
+    },
+  };
+
   return (
-    <section id="experience" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-          <span className="bg-gradient-to-r from-purple to-pink text-transparent bg-clip-text">
-            Expérience
-          </span>
-        </h2>
-        <p className="text-lg text-center text-gray-400 mb-10">Parcours professionnel et missions réalisées</p>
-        <div className="space-y-6">
-          {experiences.map((exp, idx) => {
-            const Icon = roleIcon(exp.type);
-            return (
-              <div key={idx} className="group card-base card-interactive p-6">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-3">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-dark-300 ring-1 ring-white/5 shadow-inner">
-                      <Icon className="h-5 w-5 text-gray-200 group-hover:drop-shadow-glow" />
-                    </div>
-                    <h3 className="text-xl font-bold text-white">{exp.role}</h3>
-                  </div>
-                  <div className="flex items-center gap-4 text-gray-400">
-                    <div className="flex items-center gap-2">
-                      <FaBuilding className="h-4 w-4 text-gray-300" />
-                      <span className="text-blue">{exp.company}</span>
-                    </div>
-                    <div className="hidden md:block text-gray-600">•</div>
-                    <div className="flex items-center gap-2">
-                      <FaCalendarAlt className="h-4 w-4 text-gray-300" />
-                      <span>{exp.year}</span>
-                    </div>
-                  </div>
-                </div>
-                <p className="text-gray-300 leading-relaxed">
-                  {exp.description}
-                </p>
-              </div>
-            );
-          })}
-        </div>
+    <motion.section
+      id="experience"
+      className="py-20 px-4 bg-dark-100"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={containerVariants}
+    >
+      <div className="max-w-5xl mx-auto flex flex-col items-center">
+        <motion.h2
+          className="text-4xl md:text-5xl font-extrabold text-center mb-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text drop-shadow-lg"
+          variants={itemVariants}
+        >
+          Réalisations et Parcours Muamokel
+        </motion.h2>
+        <motion.p
+          className="text-lg text-center text-gray-300 mb-10"
+          variants={itemVariants}
+        >
+          Projets menés, clients accompagnés, certifications et succès.
+        </motion.p>
+        <motion.ul
+          className="flex flex-col gap-6 w-full"
+          variants={containerVariants}
+        >
+          <motion.li
+            className="bg-dark-200 rounded-xl p-6 shadow-lg text-gray-200 text-lg"
+            variants={itemVariants}
+          >
+            +50 projets web et mobile livrés
+          </motion.li>
+          <motion.li
+            className="bg-dark-200 rounded-xl p-6 shadow-lg text-gray-200 text-lg"
+            variants={itemVariants}
+          >
+            Clients internationaux (PME, startups, ONG)
+          </motion.li>
+          <motion.li
+            className="bg-dark-200 rounded-xl p-6 shadow-lg text-gray-200 text-lg"
+            variants={itemVariants}
+          >
+            Plateformes e-commerce, SaaS, blogs, CRM
+          </motion.li>
+          <motion.li
+            className="bg-dark-200 rounded-xl p-6 shadow-lg text-gray-200 text-lg"
+            variants={itemVariants}
+          >
+            Déploiement sécurisé sur cloud public et privé
+          </motion.li>
+          <motion.li
+            className="bg-dark-200 rounded-xl p-6 shadow-lg text-gray-200 text-lg"
+            variants={itemVariants}
+          >
+            Certifications (AWS, Azure, React, Scrum)
+          </motion.li>
+          <motion.li
+            className="bg-dark-200 rounded-xl p-6 shadow-lg text-gray-200 text-lg"
+            variants={itemVariants}
+          >
+            Méthodologie agile, respect des délais, innovation continue
+          </motion.li>
+        </motion.ul>
       </div>
-    </section>
+    </motion.section>
   );
 }

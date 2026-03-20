@@ -1,5 +1,5 @@
 {
-  "name": "monsite-app-react",
+  "name": "muamokel-services",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,12 +10,33 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@heroicons/react": "^2.2.0",
+    "@stripe/stripe-js": "^8.3.0",
+    "body-parser": "^2.2.0",
+    "chart.js": "^4.5.1",
+    "cors": "^2.8.5",
+    "dompurify": "^3.3.0",
+    "express": "^5.1.0",
+    "firebase": "^12.5.0",
     "framer-motion": "^12.23.24",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.3",
+    "marked": "^16.4.2",
+    "mongodb": "^7.0.0",
+    "mongoose": "^8.19.3",
+    "node-fetch": "^3.3.2",
+    "react": "^18.3.1",
+    "react-chartjs-2": "^5.3.1",
+    "react-dom": "^18.3.1",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.9.4",
-    "react-toastify": "^11.0.5"
+    "react-toastify": "^11.0.5",
+    "react-hot-toast": "^2.4.1",
+    "stripe": "^19.3.0",
+    "axios": "^1.6.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
@@ -30,6 +51,7 @@
     "globals": "^16.4.0",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.4.7",
+    "terser": "^5.46.0",
     "vite": "^5.1.0"
   }
 }
