@@ -1,10 +1,149 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo.png" />
+    <link rel="icon" type="image/svg+xml" href="/logoM.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ir Bendelo | Full Stack</title>
+
+    <!-- Titre et description -->
+    <title>Muamokel IT | Agence de services informatiques Professionnelles</title>
+    <meta name="description" content="Application web de muamokel." />
+    <meta
+      name="keywords"
+      content="Agence de services informatiques, développement web, applications web, React, Node.js, Solutions IT, portfolio développeur, Muamokel.com"
+    />
+    <meta name="author" content="Muamokel IT" />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Icônes PWA -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="/icon-512x512.png"
+    />
+    <link rel="apple-touch-icon" href="/icon-apple-touch.png" />
+
+    <!-- Couleurs de thème -->
+    <meta name="theme-color" content="#8b5cf6" />
+    <meta name="msapplication-TileColor" content="#8b5cf6" />
+    <meta name="msapplication-navbutton-color" content="#8b5cf6" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <!-- Configuration PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Muamokel IT" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXXX-X"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-XXXXXXXXX-X');
+    </script>
+
+    <!-- SEO avancé -->
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://muamokel-services.com/" />
+
+    <!-- Local Fonts (Inter and Playfair Display) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Fallback: Local fonts if Google Fonts fail -->
+    <style>
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/inter-regular.woff2') format('woff2'),
+             url('/fonts/inter-regular.woff') format('woff');
+      }
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url('/fonts/inter-semibold.woff2') format('woff2'),
+             url('/fonts/inter-semibold.woff') format('woff');
+      }
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('/fonts/inter-bold.woff2') format('woff2'),
+             url('/fonts/inter-bold.woff') format('woff');
+      }
+      @font-face {
+        font-family: 'Playfair Display';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('/fonts/playfair-display-bold.woff2') format('woff2'),
+             url('/fonts/playfair-display-bold.woff') format('woff');
+      }
+    </style>
+
+    <!-- Material Icons with local fallback -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+      /* Local Material Icons fallback */
+      @font-face {
+        font-family: 'Material Icons';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/material-icons.woff2') format('woff2'),
+             url('/fonts/material-icons.woff') format('woff');
+      }
+    </style>
+
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="Application web de muamokel"
+    />
+    <meta
+      property="og:description"
+      content="Muamokel Services - Agence de développement web et solutions informatiques professionnelles. Expertise en React, Node.js, et technologies modernes."
+    />
+    <meta property="og:image" content="/screenshot-desktop.png" />
+    <meta property="og:url" content="https://muamokel-services.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Muamokel Services | Solutions Informatiques Professionnelles"
+    />
+    <meta
+      name="twitter:description"
+      content="Agence de développement web et solutions informatiques professionnelles"
+    />
+    <meta name="twitter:image" content="/screenshot-desktop.png" />
   </head>
   <body>
     <div id="root"></div>
