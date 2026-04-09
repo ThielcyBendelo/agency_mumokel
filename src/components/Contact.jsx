@@ -1,300 +1,154 @@
 import { useState, useEffect } from 'react';
-import { contact } from '../assets/assets.js';
-import useIntersectionObserver from '../hooks/useIntersectionObserver';
-import useFormSecurity from '../hooks/useFormSecurity';
+import { motion } from 'framer-motion';
 import { init, send } from '@emailjs/browser';
-import {
-  FaEnvelope,
-  FaLinkedin,
-  FaGithub,
-  FaInstagram,
-  FaFacebook,
-  FaWhatsapp,
+import { 
+  FaEnvelope, 
+  FaLinkedin, 
+  FaGithub, 
+  FaInstagram, // <--- Assurez-vous que celle-ci est bien là
+  FaWhatsapp, 
+  FaPaperPlane, 
+  FaMapMarkerAlt 
 } from 'react-icons/fa';
+
+import useFormSecurity from '../hooks/useFormSecurity';
 import notificationService from '../services/notificationService';
 import analyticsService from '../services/analyticsService';
 import messagingService from '../dashboard/services/messagingService';
 
-const contactIcons = {
-  Email: FaEnvelope,
-  LinkedIn: FaLinkedin,
-  GitHub: FaGithub,
-  Instagram: FaInstagram,
-  Facebook: FaFacebook,
-  WhatsApp: FaWhatsapp,
-};
-
 export default function Contact() {
-  const [elementRef, isVisible] = useIntersectionObserver();
   const [status, setStatus] = useState({ type: '', message: '' });
 
-  // Read EmailJS credentials from Vite environment variables
-  const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || '';
-  const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
-  const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
-
-  // Schéma de validation pour le formulaire de contact
-  const formSchema = {
-    name: { type: 'text', minLength: 2, maxLength: 50, required: true },
-    email: { type: 'email', required: true },
-    message: { type: 'text', minLength: 10, maxLength: 1000, required: true },
-  };
+  const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
   const { formData, handleSubmit, handleChange } = useFormSecurity(
-    formSchema,
+    {
+      name: { type: 'text', minLength: 2, required: true },
+      email: { type: 'email', required: true },
+      message: { type: 'text', minLength: 10, required: true },
+    },
     async (data) => {
-      // Logique d'envoi du formulaire sécurisé
-      setStatus({ type: 'loading', message: 'Envoi en cours...' });
-
-      // Tracker la tentative d'envoi du formulaire
-      analyticsService.trackEvent('contact_form_submit', {
-        hasName: !!data.name,
-        hasEmail: !!data.email,
-        messageLength: data.message.length,
-        category: 'contact',
-      });
-
-      // Toast de chargement
-      const loadingToast = notificationService.loading(
-        'Envoi de votre message en cours...'
-      );
-
-      // If EmailJS is not configured, fallback to mailto
-      if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
-        const mailtoLink = `mailto:contact@muamokel.com?subject=Message de ${encodeURIComponent(
-          data.name
-        )}&body=${encodeURIComponent(
-          `Nom: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
-        )}`;
-        window.location.href = mailtoLink;
-        // Fermer le toast de chargement et afficher succès
-        notificationService.dismiss(loadingToast);
-        notificationService.success('Client email ouvert avec succès !', {
-          icon: '📧',
-        });
-
-        setStatus({
-          type: 'success',
-          message: 'Ouverture de votre client email...',
-        });
-        return;
-      }
-
-      // Send via EmailJS (client-side)
+      const loadingToast = notificationService.loading('Transmission du signal...');
+      
       try {
-        const templateParams = {
+        await send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
           from_name: data.name,
           from_email: data.email,
           message: data.message,
           to_email: 'contact@muamokel.com',
-        };
-
-        await send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-
-        // 📧 Sauvegarder dans le dashboard
-        try {
-          messagingService.addMessage({
-            senderName: data.name,
-            senderEmail: data.email,
-            subject: 'Message depuis le site web',
-            message: data.message,
-            source: 'contact_form',
-            timestamp: new Date().toISOString(),
-          });
-          console.log('✅ Message sauvegardé dans le dashboard');
-        } catch (saveError) {
-          console.warn('⚠️ Erreur sauvegarde dashboard:', saveError);
-          // Ne pas bloquer le processus si la sauvegarde échoue
-        }
-
-        // Fermer le toast de chargement et afficher succès
-        notificationService.dismiss(loadingToast);
-        notificationService.formSuccess(
-          'Message envoyé avec succès !',
-          'Je vous répondrai dans les plus brefs délais. Merci !'
-        );
-
-        setStatus({
-          type: 'success',
-          message: 'Message envoyé avec succès ! Merci.',
         });
+
+        notificationService.dismiss(loadingToast);
+        notificationService.success('Message reçu ! On revient vers vous très vite.');
+        setStatus({ type: 'success', message: 'Envoyé !' });
       } catch (err) {
-        console.error('EmailJS send error', err);
-        // Fallback to mailto on error
-        const mailtoLink = `mailto:contact@muamokel.com?subject=Message de ${encodeURIComponent(
-          data.name
-        )}&body=${encodeURIComponent(
-          `Nom: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
-        )}`;
-        window.location.href = mailtoLink;
-        // Fermer le toast de chargement et afficher erreur
         notificationService.dismiss(loadingToast);
-        notificationService.warning(
-          'Envoi par EmailJS échoué. Ouverture de votre client email...',
-          { autoClose: 5000 }
-        );
-
-        setStatus({
-          type: 'error',
-          message:
-            'Échec EmailJS. Ouverture de votre client email comme alternative...',
-        });
+        window.location.href = `mailto:contact@://muamokel.com{data.message}`;
       }
     }
   );
 
-  useEffect(() => {
-    // Initialize EmailJS with your public key if available
-    try {
-      if (EMAILJS_PUBLIC_KEY) init(EMAILJS_PUBLIC_KEY);
-    } catch (err) {
-      console.warn('EmailJS init failed', err);
-    }
-  }, [EMAILJS_PUBLIC_KEY]);
-
   return (
-    <section ref={elementRef} id="contact" className="py-20 px-4 bg-dark-200">
-      <div
-        className={`max-w-4xl mx-auto transition-all duration-1000 transform ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-        }`}
-      >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
-            Contact
-          </span>
-        </h2>
+    <section id="contact" className="py-24 bg-[#0a0a0c] text-white min-h-screen">
+      <div className="max-w-7xl mx-auto px-6">
+        
+        {/* Header Agence */}
+        <div className="mb-20">
+          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-red-500 font-mono tracking-[0.3em] uppercase text-xs">Prêt pour la suite ?</motion.span>
+          <motion.h2 initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} className="text-5xl md:text-7xl font-black mt-4 tracking-tighter uppercase italic">
+            LANCEZ VOTRE <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-purple-500">PROJET</span>
+          </motion.h2>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-          {/* Formulaire */}
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-6 p-6 sm:p-8 bg-dark-300/50 backdrop-blur-sm rounded-2xl 
-                       shadow-2xl shadow-purple-500/20 border border-gray-700/50 
-                       hover:shadow-purple-500/30 transition-all duration-300 
-                       order-1 md:order-none"
-          >
-            {(!EMAILJS_SERVICE_ID ||
-              !EMAILJS_TEMPLATE_ID ||
-              !EMAILJS_PUBLIC_KEY) && (
-              <div className="p-4 bg-yellow-900/30 border border-yellow-700 rounded-lg">
-                <p className="text-yellow-300 text-sm">
-                  ⚠️ EmailJS non configuré. Le formulaire utilisera votre client
-                  email par défaut.
-                </p>
+        <div className="grid lg:grid-cols-12 gap-16">
+          
+          {/* INFOS DE CONTACT (4 Colonnes) */}
+          <div className="lg:col-span-4 space-y-10">
+            <div className="space-y-6">
+              <div className="flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-red-500 group-hover:bg-red-500 group-hover:text-white transition-all">
+                  <FaEnvelope />
+                </div>
+                <div>
+                  <p className="text-[10px] text-gray-500 uppercase font-black tracking-widest">Email</p>
+                  <p className="text-lg font-bold">contact@muamokel.com</p>
+                </div>
               </div>
-            )}
 
-            <div>
-              <label className="block text-gray-300 mb-2">Nom</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="contact-input w-full px-4 py-3 bg-dark-100 border border-gray-600/50 rounded-xl
-                         text-white placeholder-gray-400 focus:outline-none focus:border-purple 
-                         focus:ring-2 focus:ring-purple/20 transition-all duration-300 
-                         shadow-inner backdrop-blur-sm"
-                placeholder="Votre nom complet"
-              />
+              <div className="flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-purple-500 group-hover:bg-purple-500 group-hover:text-white transition-all">
+                  <FaWhatsapp />
+                </div>
+                <div>
+                  <p className="text-[10px] text-gray-500 uppercase font-black tracking-widest">WhatsApp</p>
+                  <p className="text-lg font-bold">+243 000 000 000</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                  <FaMapMarkerAlt />
+                </div>
+                <div>
+                  <p className="text-[10px] text-gray-500 uppercase font-black tracking-widest">Bureaux</p>
+                  <p className="text-lg font-bold">Kinshasa, RDC</p>
+                </div>
+              </div>
             </div>
 
-            <div>
-              <label className="block text-gray-300 mb-2">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="contact-input w-full px-4 py-3 bg-dark-100 border border-gray-600/50 rounded-xl
-                         text-white placeholder-gray-400 focus:outline-none focus:border-purple 
-                         focus:ring-2 focus:ring-purple/20 transition-all duration-300 
-                         shadow-inner backdrop-blur-sm"
-                placeholder="votre.email@exemple.com"
-              />
+            <div className="pt-10 border-t border-white/5">
+              <p className="text-gray-500 text-sm mb-6 uppercase tracking-widest font-black">Suivez-nous</p>
+              <div className="flex gap-4">
+                {[FaLinkedin, FaGithub, FaInstagram].map((Icon, i) => (
+                  <button key={i} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                    <Icon />
+                  </button>
+                ))}
+              </div>
             </div>
+          </div>
 
-            <div>
-              <label className="block text-gray-300 mb-2">Message</label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows="4"
-                className="contact-input w-full px-4 py-3 bg-dark-100 border border-gray-600/50 rounded-xl
-                         text-white placeholder-gray-400 focus:outline-none focus:border-purple 
-                         focus:ring-2 focus:ring-purple/20 transition-all duration-300 
-                         shadow-inner backdrop-blur-sm resize-none"
-                placeholder="Décrivez votre projet ou votre message..."
-              />
-            </div>
+          {/* FORMULAIRE (8 Colonnes) */}
+          <div className="lg:col-span-8">
+            <form onSubmit={handleSubmit} className="p-10 rounded-[3rem] bg-white/[0.02] border border-white/10 backdrop-blur-xl space-y-8">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-4">Nom Complet</label>
+                  <input 
+                    name="name" value={formData.name} onChange={handleChange} required
+                    placeholder="John Doe"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 outline-none focus:border-red-500 transition-colors"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-4">Email Pro</label>
+                  <input 
+                    name="email" value={formData.email} onChange={handleChange} required
+                    placeholder="john@startup.com"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 outline-none focus:border-red-500 transition-colors"
+                  />
+                </div>
+              </div>
 
-            <button
-              type="submit"
-              className="w-full px-8 py-4 bg-gradient-to-r from-purple to-pink text-white 
-                       rounded-xl transform transition-all hover:scale-105 
-                       hover:shadow-2xl hover:shadow-purple-500/40 disabled:opacity-50
-                       font-semibold shadow-lg shadow-purple-500/25"
-              disabled={status.type === 'loading'}
-            >
-              {status.type === 'loading' ? 'Envoi...' : 'Envoyer le message'}
-            </button>
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-4">Votre Message</label>
+                <textarea 
+                  name="message" value={formData.message} onChange={handleChange} required
+                  placeholder="Décrivez votre projet en quelques mots..."
+                  rows="6"
+                  className="w-full bg-white/5 border border-white/10 rounded-[2rem] p-6 outline-none focus:border-red-500 transition-colors"
+                />
+              </div>
 
-            {status.message && (
-              <p
-                className={`text-center ${
-                  status.type === 'success' ? 'text-green-400' : 'text-red-400'
-                }`}
+              <button 
+                type="submit"
+                className="group w-full py-5 bg-white text-black font-black rounded-full flex items-center justify-center gap-3 hover:bg-red-600 hover:text-white transition-all uppercase tracking-tighter"
               >
-                {status.message}
-              </p>
-            )}
-          </form>
-
-          {/* Liens de contact */}
-          <div className="space-y-6 order-2 md:order-none">
-            <h3 className="text-xl font-bold text-gray-300 mb-4 text-center md:text-left">
-              Autres moyens de me contacter
-            </h3>
-            <div className="space-y-3 sm:space-y-4">
-              {contact
-                .filter((c) => !['Instagram', 'Facebook', 'WhatsApp'].includes(c.label))
-                .map((c, idx) => {
-                  const Icon = contactIcons[c.label];
-                  let href = c.link;
-                  if (c.label === 'Email' && !/^mailto:/i.test(href))
-                    href = `mailto:${href}`;
-                  return (
-                    <a
-                      key={idx}
-                      href={href}
-                      target={href.startsWith('mailto:') ? undefined : '_blank'}
-                      rel={
-                        href.startsWith('mailto:')
-                          ? undefined
-                          : 'noopener noreferrer'
-                      }
-                      onClick={() => {
-                        analyticsService.trackEvent('contact_link_click', {
-                          platform: c.label,
-                          category: 'social_media',
-                        });
-                      }}
-                      className="flex items-center gap-3 p-3 sm:p-4 bg-dark-300 text-gray-300 rounded-lg
-                               transform transition-all hover:scale-[1.02] hover:bg-dark-400
-                               hover:text-white border border-dark-300 hover:border-purple
-                               text-sm sm:text-base"
-                    >
-                      {Icon && <Icon className="text-xl" />}
-                      <span>{c.label}</span>
-                    </a>
-                  );
-                })}
-            </div>
+                Envoyer le Briefing <FaPaperPlane className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </button>
+            </form>
           </div>
         </div>
       </div>

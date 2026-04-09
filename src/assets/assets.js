@@ -11,7 +11,7 @@ export const profile1Image = '/images/logoM.png';
 export const bgImage = '/images/background.jpg';
 export const programmationImage = '/images/image.programmation2.jpg';
 export const reactLogo = '/images/react.svg';
-export const logoImage = '/images/logo.png';
+export const logoImage = '/images/logoM.png';
 
 export const about =
   "Ingénieur logiciel polyvalent avec expertise en développement Full Stack, spécialisé dans la création d'applications web et mobiles robustes et évolutives. Expérience en gestion de projet, tests logiciels et architecture moderne.";

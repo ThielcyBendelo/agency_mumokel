@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Routes, Route } from 'react-router-dom';
@@ -15,7 +15,6 @@ import OfflineIndicator from './components/OfflineIndicator.jsx';
 
 // Route Guards
 import PrivateRoute from './components/PrivateRoute';
-import AdminRoute from './components/AdminRoute';
 
 // Public Pages
 import Home from './pages/Home';
@@ -49,44 +48,37 @@ import SettingsPage from './pages/SettingsPage';
 import ClientRegistrationPage from './pages/ClientRegistrationPage';
 import PaymentPage from './pages/PaymentPage';
 
-// Admin Pages
-import DashboardPage from './pages/DashboardPage';
-import UserManagementPage from './pages/UserManagementPage';
-import PaymentManagementPage from './pages/PaymentManagementPage';
 
-// Dashboard Components (Admin)
-import {
-  AdminHome,
-  Clients,
-  Subscribers,
-  PaymentManagement,
-  InvoiceManagement,
-  Analytics,
-  Projects,
-  Messaging,
-  Profile,
-} from './dashboard';
-import FinanceDashboard from './dashboard/FinanceDashboard';
-import AdminLayout from './dashboard/components/AdminLayout';
-import ProjectDetails from './dashboard/pages/ProjectDetails';
+// Dashboard Components (Admin) - Lazy loaded
+// const Clients = lazy(() => import('./pages/Clients'));
+// const Subscribers = lazy(() => import('./pages/Subscribers'));
+// const PaymentManagement = lazy(() => import('./pages/PaymentManagement'));
+// const InvoiceManagement = lazy(() => import('./pages/InvoiceManagement'));
+// const Analytics = lazy(() => import('./pages/Analytics'));
+// const Projects = lazy(() => import('./pages/Projects'));
+// const Messaging = lazy(() => import('./pages/Messaging'));
+// const Profile = lazy(() => import('./pages/Profile'));
+// const FinanceDashboard = lazy(() => import('./pages/FinanceDashboard'));
+// const AdminLayout = lazy(() => import('./components/AdminLayout'));
+// const ProjectDetails = lazy(() => import('./pages/ProjectDetails'));
 
 // 404 Page
 import NotFound from './pages/NotFound';
 
 // User Menu System Components (Intégration complète - Étape 2) - Lazy loaded to prevent build errors
-const UserDashboard = lazy(() => import('./user-menu-system/pages/UserDashboard'));
-const ManagerDashboard = lazy(() => import('./user-menu-system/pages/ManagerDashboard'));
-const AdminDashboard = lazy(() => import('./user-menu-system/pages/AdminDashboard'));
-const UserMenuProfilePage = lazy(() => import('./user-menu-system/pages/UserMenuProfilePage'));
-const UserMenuSettingsPage = lazy(() => import('./user-menu-system/pages/UserMenuSettingsPage'));
+// const UserDashboard = lazy(() => import('./user-menu-system/pages/UserDashboard'));
+// const ManagerDashboard = lazy(() => import('./user-menu-system/pages/ManagerDashboard'));
+// const AdminDashboard = lazy(() => import('./user-menu-system/pages/AdminDashboard'));
+// const UserMenuProfilePage = lazy(() => import('./user-menu-system/pages/UserMenuProfilePage'));
+// const UserMenuSettingsPage = lazy(() => import('./user-menu-system/pages/UserMenuSettingsPage'));
 
 // Additional User Menu Pages - Lazy loaded
-const CreatePage = lazy(() => import('./user-menu-system/pages/CreatePage'));
-const ReportsPage = lazy(() => import('./user-menu-system/pages/ReportsPage'));
-const HelpPage = lazy(() => import('./user-menu-system/pages/HelpPage'));
-const UserMenuNotificationsPage = lazy(() => import('./user-menu-system/pages/NotificationsPage'));
-const UserMenuTeamPage = lazy(() => import('./user-menu-system/pages/TeamPage'));
-const ActivitiesPage = lazy(() => import('./user-menu-system/pages/ActivitiesPage'));
+// const CreatePage = lazy(() => import('./user-menu-system/pages/CreatePage'));
+// const ReportsPage = lazy(() => import('./user-menu-system/pages/ReportsPage'));
+// const HelpPage = lazy(() => import('./user-menu-system/pages/HelpPage'));
+// const UserMenuNotificationsPage = lazy(() => import('./user-menu-system/pages/NotificationsPage'));
+// const UserMenuTeamPage = lazy(() => import('./user-menu-system/pages/TeamPage'));
+// const ActivitiesPage = lazy(() => import('./user-menu-system/pages/ActivitiesPage'));
 
 const App = () => {
   const [splashDone, setSplashDone] = React.useState(false);
@@ -181,27 +173,9 @@ const App = () => {
               }
             />
 
-            {/* ==================== USER MENU SYSTEM ROUTES (Améliorées) ==================== */}
-            {/* Routes principales du système utilisateur */}
-            <Route path="/user-dashboard" element={<UserDashboard />} />
-            <Route path="/manager-dashboard" element={<ManagerDashboard />} />
-            <Route path="/admin-dashboard" element={<AdminDashboard />} />
-            <Route path="/user-menu/profile" element={<UserMenuProfilePage />} />
-            <Route path="/user-menu/settings" element={<UserMenuSettingsPage />} />
-            <Route path="/user-menu/create" element={<CreatePage />} />
-            <Route path="/user-menu/reports" element={<ReportsPage />} />
-            <Route path="/user-menu/help" element={<HelpPage />} />
-            <Route path="/user-menu/notifications" element={<UserMenuNotificationsPage />} />
-            <Route path="/user-menu/team" element={<UserMenuTeamPage />} />
-            <Route path="/user-menu/activities" element={<ActivitiesPage />} />
-
-            {/* Routes de redirection automatique vers user-menu-system */}
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/user-management" element={<UserManagementPage />} />
-            <Route path="/payment-management" element={<PaymentManagementPage />} />
-
+          
             {/* Routes Admin Dashboard avec Layout */}
-            <Route path="/admin" element={<AdminLayout />}>
+            {/* <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminHome />} />
               <Route path="clients" element={<Clients />} />
               <Route path="subscribers" element={<Subscribers />} />
@@ -213,7 +187,7 @@ const App = () => {
               <Route path="projects/:id" element={<ProjectDetails />} />
               <Route path="messaging" element={<Messaging />} />
               <Route path="profile" element={<Profile />} />
-            </Route>
+            </Route> */}
 
             {/* ==================== ROUTE 404 ==================== */}
             <Route path="*" element={<NotFound />} />

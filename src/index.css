@@ -20,8 +20,8 @@
     --surface: #1a1a1a;
     --muted: #e5e5e5;
     --muted-2: #a3a3a3;
-    --accent-1: #8b5cf6;
-    --accent-2: #ec4899;
+    --accent-1: #100133;
+    --accent-2: #b40808;
     --text-primary: #ffffff;
     --text-secondary: #d1d5db;
     --border-color: #374151;
@@ -32,8 +32,8 @@
   --color-dark-200: #1f1f1f;
   --color-dark-300: #2d2d2d;
   --color-dark-400: #3d3d3d;
-  --color-purple: #8b5cf6;
-  --color-pink: #ec4899;
+  --color-purple: #100133;
+  --color-pink: #b40808;
   --color-blue: #3b82f6;
 
   /* RGB versions for opacity support */
@@ -47,8 +47,8 @@
   --surface: #1a1a1a;
   --muted: #e5e5e5;
   --muted-2: #a3a3a3;
-  --accent-1: #8b5cf6;
-  --accent-2: #ec4899;
+  --accent-1: #100133;
+  --accent-2: #b40808;
   --text-primary: #ffffff;
   --text-secondary: #d1d5db;
   --border-color: #374151;
@@ -60,7 +60,7 @@
   --surface: #f8fafc;
   --muted: #0f172a;
   --muted-2: #334155;
-  --accent-1: #7c3aed;
+  --accent-1: #100133;
   --accent-2: #db2777;
   --text-primary: #0f172a;
   --text-secondary: #1e293b;
@@ -69,7 +69,7 @@
 
 .typewriter {
   overflow: hidden;
-  border-right: 0.15em solid #8b5cf6;
+  border-right: 0.15em solid #100133;
   white-space: nowrap;
   width: 0;
   animation: typing 3s steps(20, end) forwards, blink-caret 0.75s step-end 4;
@@ -88,7 +88,7 @@
     border-color: transparent;
   }
   50% {
-    border-color: #8b5cf6;
+    border-color: #100133;
   }
 }
 body {
@@ -140,7 +140,7 @@ h6 {
   --surface: #f8fafc;
   --muted: #0f172a;
   --muted-2: #334155;
-  --accent-1: #7c3aed;
+  --accent-1:#100133;
   --accent-2: hsl(0, 91%, 45%);
 }
 
@@ -307,7 +307,7 @@ body {
   }
 
   [data-theme='light'] .hover\:border-purple:hover {
-    border-color: #7c3aed !important;
+    border-color: #100133 !important;
   }
 
   /* Cards en mode clair */
@@ -346,7 +346,7 @@ body {
 
   /* Améliorations hover en mode clair */
   [data-theme='light'] .hover\:text-purple-400:hover {
-    color: #7c3aed !important;
+    color: #100133 !important;
   }
 
   [data-theme='light'] .hover\:bg-dark-400:hover {

@@ -1,263 +1,141 @@
-import useIntersectionObserver from '../hooks/useIntersectionObserver';
 import { useEffect } from 'react';
-import notificationService from '../services/notificationService';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { FaCode, FaCloud, FaMobile, FaRocket, FaChevronRight, FaTerminal } from 'react-icons/fa';
+import useIntersectionObserver from '../hooks/useIntersectionObserver';
+import notificationService from '../services/notificationService';
 import AnimatedSection from './AnimatedSection';
 import RippleGrid from './RippleGrid';
-import {
-  FaCode,
-  FaMobile,
-  FaCloud,
-  FaRocket,
-  FaCheckCircle
-} from 'react-icons/fa';
 
 export default function Hero() {
   const [elementRef] = useIntersectionObserver();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      notificationService.welcome();
-    }, 2000);
+    const timer = setTimeout(() => notificationService.welcome(), 2000);
     return () => clearTimeout(timer);
   }, []);
 
   const features = [
-    { icon: FaCode, text: 'Développement Web & Mobile' },
-    { icon: FaCloud, text: 'Solutions Cloud & DevOps' },
-    { icon: FaMobile, text: 'Applications Sur Mesure' },
-    { icon: FaRocket, text: 'Innovation & Performance' }
+    { icon: FaCode, text: 'Web & Mobile', color: 'from-blue-600 to-cyan-400', delay: 1.1 },
+    { icon: FaCloud, text: 'Cloud & DevOps', color: 'from-purple-600 to-pink-500', delay: 1.2 },
+    { icon: FaMobile, text: 'Custom Apps', color: 'from-orange-500 to-red-500', delay: 1.3 },
+    { icon: FaRocket, text: 'Optimization', color: 'from-green-500 to-emerald-400', delay: 1.4 }
   ];
 
   return (
     <section
       ref={elementRef}
       id="home"
-      className="relative min-h-[80vh] flex flex-col justify-start items-center text-center px-4 pt-32 pb-16 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden bg-[#050505]"
     >
-      {/* Ripple Grid Background */}
-      <div className="absolute inset-0 z-0">
+      {/* 1. Background Layer Dynamique */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <RippleGrid />
+        {/* Cercles de lumière (Glow) plus diffus pour un aspect premium */}
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/10 rounded-full blur-[150px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-red-600/10 rounded-full blur-[150px]" />
       </div>
+      
+      <div className="relative z-20 max-w-7xl mx-auto text-center pt-20">
+        
+        {/* Badge de statut optimisé */}
+        <AnimatedSection variant="slideUp" delay={0.2}>
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.03] border border-white/10 mb-10 backdrop-blur-xl shadow-2xl">
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+              </span>
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em]">
+                Status: System Active
+              </span>
+            </div>
+            <div className="h-4 w-px bg-white/10" />
+            <span className="text-[10px] font-bold text-white uppercase tracking-widest">
+              v2.0.26
+            </span>
+          </div>
+        </AnimatedSection>
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-dark-100/90 to-dark-100/70 z-10" />
-
-      {/* Particules flottantes animées - Optimized count */}
-      <div className="absolute inset-0 z-30 pointer-events-none">
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1.5 h-1.5 bg-gradient-to-r from-blue-400/60 to-purple-500/60 rounded-full"
-            animate={{
-              x: [0, Math.random() * 60 - 30],
-              y: [0, Math.random() * 60 - 30],
-              opacity: [0, 0.8, 0],
-              scale: [0, 1, 0],
-            }}
-            transition={{
-              duration: Math.random() * 4 + 3,
-              repeat: Infinity,
-              delay: Math.random() * 1.5,
-              ease: "easeInOut",
-            }}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Hero Content */}
-      <div
-        className="relative z-20 w-full max-w-7xl mx-auto px-4"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '20px'
-        }}
-      >
-
-        {/* Sous-titre - Full Width */}
+        {/* Titre Principal (Typographie massive) */}
         <AnimatedSection variant="slideUp" delay={0.4}>
-          <motion.h2
-            className="text-2xl md:text-4xl font-bold text-gray-300 text-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            Agence de{' '}
-            <motion.span
-              className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400"
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              Développement Informatique
-            </motion.span>
-          </motion.h2>
+          <h1 className="text-6xl md:text-9xl font-black text-white tracking-tighter leading-[0.85] mb-8 uppercase italic">
+            Architecting <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-red-500 to-purple-600 animate-gradient-x">
+              Digital DNA
+            </span>
+          </h1>
         </AnimatedSection>
 
+        {/* Description Text (Plus d'espace et de clarté) */}
+        <AnimatedSection variant="fadeIn" delay={0.6}>
+          <p className="max-w-3xl mx-auto text-lg md:text-2xl text-gray-400 font-light leading-relaxed mb-12">
+            Nous fusionnons la rigueur de l'architecture et la puissance du code pour bâtir des 
+            <span className="text-white font-bold"> infrastructures scalables </span> 
+            qui redéfinissent les standards de votre industrie.
+          </p>
+        </AnimatedSection>
 
-
-        {/* Description - Enhanced Visibility & Animation */}
+        {/* Boutons d'Action (Style Neobrutalisme Soft) */}
         <AnimatedSection variant="fadeIn" delay={0.8}>
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
-          >
-            {/* Animated Background Glow */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 rounded-2xl blur-xl"
-              animate={{
-                scale: [1, 1.05, 1],
-                opacity: [0.3, 0.6, 0.3]
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
+          <div className="flex flex-wrap gap-4"> {/* Assurez-vous que la div parente est ouverte */}
+  
+  {/* Bouton "Start a Project" -> Vers la page Contact ou Devis */}
+  <Link to="/contact">
+    <motion.button
+      whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(220, 38, 38, 0.4)" }}
+      whileTap={{ scale: 0.98 }}
+      className="px-10 py-5 bg-red-600 text-white font-black rounded-sm flex items-center gap-3 uppercase tracking-widest text-xs transition-all shadow-xl shadow-red-600/20"
+    >
+      Start a Project <FaChevronRight className="text-[10px]" />
+    </motion.button>
+  </Link>
 
-            {/* Main Description Container */}
+  {/* Bouton "Explore Stack" -> Vers la page Offres ou Technologie */}
+  <Link to="/offers">
+    <motion.button
+      whileHover={{ backgroundColor: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255,255,255,0.4)' }}
+      whileTap={{ scale: 0.98 }}
+      className="px-10 py-5 bg-transparent border border-white/10 text-white font-black rounded-sm uppercase tracking-widest text-xs backdrop-blur-md transition-all"
+    >
+      Explore Stack
+    </motion.button>
+  </Link>
+</div>
+        </AnimatedSection>
+
+        {/* Features Grid (Architecture de cartes plus propre) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-5xl mx-auto">
+          {features.map((feature, i) => (
             <motion.div
-              className="relative bg-gradient-to-r from-slate-900/80 via-slate-800/80 to-slate-900/80 backdrop-blur-md rounded-2xl p-8 border border-slate-700/50"
-              whileHover={{
-                scale: 1.02,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 30px rgba(59, 130, 246, 0.2)",
-                transition: { duration: 0.3, ease: "easeOut" }
-              }}
-              initial={{ boxShadow: "0 10px 30px -5px rgba(0, 0, 0, 0.3)" }}
-              animate={{
-                boxShadow: [
-                  "0 10px 30px -5px rgba(0, 0, 0, 0.3)",
-                  "0 15px 35px -5px rgba(0, 0, 0, 0.35), 0 0 20px rgba(59, 130, 246, 0.1)",
-                  "0 10px 30px -5px rgba(0, 0, 0, 0.3)"
-                ]
-              }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: feature.delay }}
+              whileHover={{ y: -10, borderColor: 'rgba(255,255,255,0.2)' }}
+              className="group p-8 rounded-sm border border-white/5 bg-white/[0.01] backdrop-blur-sm transition-all relative overflow-hidden"
             >
-              {/* Animated Border */}
-              <motion.div
-                className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30"
-              />
-
-              {/* Content */}
-              <div className="relative z-10 text-center" style={{ display: 'flex', justifyContent: 'start', textAlign: 'center' }}>
-                <motion.p
-                  className="text-xl md:text-2xl text-white font-medium leading-relaxed mb-4"
-                  animate={{
-                    textShadow: [
-                      "0 0 10px rgba(255,255,255,0.1)",
-                      "0 0 20px rgba(255,255,255,0.2)",
-                      "0 0 10px rgba(255,255,255,0.1)"
-                    ]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  Transformez vos idées en{' '}
-                  <motion.span
-                    className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 font-bold"
-                    animate={{
-                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                    }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                    style={{ backgroundSize: "200% 200%" }}
-                  >
-                    solutions digitales innovantes
-                  </motion.span>
-                </motion.p>
-
-                <motion.p
-                  className="text-lg md:text-xl text-slate-300 leading-relaxed"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1, duration: 0.8 }}
-                >
-                  Nous créons des applications web et mobile sur mesure,
-                  des systèmes cloud performants et des expériences utilisateur exceptionnelles.
-                </motion.p>
-
-
+              {/* Effet de brillance au hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              
+              <div className={`w-14 h-14 mx-auto mb-6 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white text-2xl shadow-2xl transform group-hover:rotate-12 transition-transform duration-500`}>
+                <feature.icon />
               </div>
+              <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] group-hover:text-white transition-colors">
+                {feature.text}
+              </span>
             </motion.div>
-          </motion.div>
-        </AnimatedSection>
-
-        {/* Features Grid - Full Width */}
-        <AnimatedSection variant="fadeIn" delay={1.0}>
-          <motion.div
-            className="flex flex-wrap justify-center gap-4"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: 0.1,
-                },
-              },
-            }}
-          >
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                className="group relative bg-dark-200/50 backdrop-blur-sm rounded-xl p-4 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 w-full max-w-xs"
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                whileHover={{
-                  scale: 1.05,
-                  y: -8,
-                  boxShadow: "0 25px 50px -12px rgba(139, 92, 246, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05), 0 0 25px rgba(139, 92, 246, 0.2)"
-                }}
-                initial={{ boxShadow: "0 4px 15px -3px rgba(0, 0, 0, 0.1)" }}
-                animate={{
-                  boxShadow: [
-                    "0 4px 15px -3px rgba(0, 0, 0, 0.1)",
-                    "0 8px 25px -5px rgba(139, 92, 246, 0.15)",
-                    "0 4px 15px -3px rgba(0, 0, 0, 0.1)"
-                  ]
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                />
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  <feature.icon className="text-3xl text-purple-400 mb-2 group-hover:text-purple-300 transition-colors" />
-                  <p className="text-xs md:text-sm text-gray-300 font-medium">
-                    {feature.text}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </AnimatedSection>
-
-
-
-
+          ))}
+        </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Indicateur de Scroll discret */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity }}
+        animate={{ y: [0, 10, 0] }} 
+        transition={{ repeat: Infinity, duration: 2 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/20 text-xs font-mono uppercase tracking-[0.5em]"
       >
-        <div className="w-6 h-10 border-2 border-purple-400 rounded-full flex justify-center pt-2">
-          <motion.div
-            className="w-1.5 h-1.5 bg-purple-400 rounded-full"
-            animate={{ y: [0, 16, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          />
-        </div>
+        Scroll to discover
       </motion.div>
     </section>
   );

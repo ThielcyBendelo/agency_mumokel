@@ -4,10 +4,11 @@ import TechnologiesSection from '../components/TechnologiesSection';
 import NavbarSecured from '../components/NavbarSecured';
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
-import PortfolioSection from '../components/PortfolioSection';
+// import PortfolioSection from '../components/PortfolioSection';
 import ProcessSection from '../components/ProcessSection';
 import ProfessionalSidebar from '../components/ProfessionalSidebar';
 import FAQ from '../components/FAQ';
+
 
 export default function Home() {
   const [isProfessionalSidebarOpen, setIsProfessionalSidebarOpen] = useState(false);
@@ -82,40 +83,6 @@ export default function Home() {
             className="relative"
           >
             <Hero />
-          </motion.section>
-
-          {/* Portfolio Section - Full Width Grid Area */}
-          <motion.section
-            style={{ gridArea: 'portfolio' }}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            whileHover={{
-              scale: 1.02,
-              boxShadow: "0 35px 80px -20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 50px rgba(34, 197, 94, 0.2), 0 0 100px rgba(59, 130, 246, 0.15), 0 0 150px rgba(16, 185, 129, 0.1)"
-            }}
-            animate={{
-              boxShadow: [
-                "0 15px 35px -8px rgba(0, 0, 0, 0.3), 0 0 20px rgba(34, 197, 94, 0.1)",
-                "0 25px 60px -15px rgba(0, 0, 0, 0.4), 0 0 30px rgba(34, 197, 94, 0.15), 0 0 50px rgba(59, 130, 246, 0.1)",
-                "0 15px 35px -8px rgba(0, 0, 0, 0.3), 0 0 20px rgba(34, 197, 94, 0.1)"
-              ]
-            }}
-            transition={{
-              whileInView: { duration: 0.8, delay: 0.2 },
-              animate: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-            }}
-            className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black"
-          >
-            {/* Advanced Background Effects */}
-            <div className="absolute inset-0 bg-gradient-to-br from-green-900/10 via-emerald-800/5 to-teal-900/10"></div>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.1),transparent_50%)]"></div>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(16,185,129,0.08),transparent_50%)]"></div>
-
-            {/* Dynamic Border Glow */}
-            <div className="absolute inset-0 rounded-lg border border-green-500/20 shadow-[inset_0_0_20px_rgba(34,197,94,0.1)]"></div>
-
-            <PortfolioSection />
           </motion.section>
 
           {/* Process Section - Full Width Grid Area */}
@@ -341,6 +308,7 @@ export default function Home() {
             }}
             className="relative"
           >
+    
             <FAQ />
           </motion.section>
         </main>
