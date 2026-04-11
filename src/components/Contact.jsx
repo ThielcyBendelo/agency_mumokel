@@ -5,12 +5,14 @@ import {
   FaEnvelope, 
   FaLinkedin, 
   FaGithub, 
-  FaInstagram, // <--- Assurez-vous que celle-ci est bien là
+  FaInstagram, 
   FaWhatsapp, 
   FaPaperPlane, 
-  FaMapMarkerAlt 
+  FaMapMarkerAlt,
+  FaSpinner 
 } from 'react-icons/fa';
 
+// VÉRIFIEZ BIEN QUE CE CHEMIN EST CORRECT (../hooks/useFormSecurity)
 import useFormSecurity from '../hooks/useFormSecurity';
 import notificationService from '../services/notificationService';
 import analyticsService from '../services/analyticsService';
@@ -18,6 +20,15 @@ import messagingService from '../dashboard/services/messagingService';
 
 export default function Contact() {
   const [status, setStatus] = useState({ type: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Initialisation d'EmailJS au montage du composant
+  useEffect(() => {
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      init(publicKey);
+    }
+  }, []);
 
   const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
   const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -30,22 +41,32 @@ export default function Contact() {
       message: { type: 'text', minLength: 10, required: true },
     },
     async (data) => {
+      setIsSubmitting(true);
       const loadingToast = notificationService.loading('Transmission du signal...');
       
       try {
-        await send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-          from_name: data.name,
-          from_email: data.email,
-          message: data.message,
-          to_email: 'contact@muamokel.com',
-        });
+        await send(
+          EMAILJS_SERVICE_ID, 
+          EMAILJS_TEMPLATE_ID, 
+          {
+            from_name: data.name,
+            from_email: data.email,
+            message: data.message,
+            reply_to: data.email,
+          },
+          EMAILJS_PUBLIC_KEY
+        );
 
         notificationService.dismiss(loadingToast);
         notificationService.success('Message reçu ! On revient vers vous très vite.');
         setStatus({ type: 'success', message: 'Envoyé !' });
       } catch (err) {
+        console.error("Erreur EmailJS:", err);
         notificationService.dismiss(loadingToast);
-        window.location.href = `mailto:contact@://muamokel.com{data.message}`;
+        // Solution de secours si l'API échoue
+        window.location.href = `mailto:servicebanamokeli@://gmail.com de ${data.name}&body=${data.message}`;
+      } finally {
+        setIsSubmitting(false);
       }
     }
   );
@@ -54,7 +75,6 @@ export default function Contact() {
     <section id="contact" className="py-24 bg-[#0a0a0c] text-white min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* Header Agence */}
         <div className="mb-20">
           <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-red-500 font-mono tracking-[0.3em] uppercase text-xs">Prêt pour la suite ?</motion.span>
           <motion.h2 initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} className="text-5xl md:text-7xl font-black mt-4 tracking-tighter uppercase italic">
@@ -64,7 +84,6 @@ export default function Contact() {
 
         <div className="grid lg:grid-cols-12 gap-16">
           
-          {/* INFOS DE CONTACT (4 Colonnes) */}
           <div className="lg:col-span-4 space-y-10">
             <div className="space-y-6">
               <div className="flex items-center gap-4 group">
@@ -73,7 +92,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-[10px] text-gray-500 uppercase font-black tracking-widest">Email</p>
-                  <p className="text-lg font-bold">contact@muamokel.com</p>
+                  <p className="text-lg font-bold">servicebanamokeli@gmail.com</p>
                 </div>
               </div>
 
@@ -83,7 +102,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-[10px] text-gray-500 uppercase font-black tracking-widest">WhatsApp</p>
-                  <p className="text-lg font-bold">+243 000 000 000</p>
+                  <p className="text-lg font-bold">+243 829 054 350</p>
                 </div>
               </div>
 
@@ -110,24 +129,27 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* FORMULAIRE (8 Colonnes) */}
           <div className="lg:col-span-8">
             <form onSubmit={handleSubmit} className="p-10 rounded-[3rem] bg-white/[0.02] border border-white/10 backdrop-blur-xl space-y-8">
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-4">Nom Complet</label>
                   <input 
-                    name="name" value={formData.name} onChange={handleChange} required
+                    name="name" 
+                    value={formData.name || ''} // Le "|| ''" corrige l'erreur Uncontrolled input
+                    onChange={handleChange} required
                     placeholder="John Doe"
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 outline-none focus:border-red-500 transition-colors"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 outline-none focus:border-red-500 transition-colors text-white"
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-4">Email Pro</label>
                   <input 
-                    name="email" value={formData.email} onChange={handleChange} required
+                    name="email" 
+                    value={formData.email || ''} 
+                    onChange={handleChange} required
                     placeholder="john@startup.com"
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 outline-none focus:border-red-500 transition-colors"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 outline-none focus:border-red-500 transition-colors text-white"
                   />
                 </div>
               </div>
@@ -135,18 +157,24 @@ export default function Contact() {
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-4">Votre Message</label>
                 <textarea 
-                  name="message" value={formData.message} onChange={handleChange} required
+                  name="message" 
+                  value={formData.message || ''} 
+                  onChange={handleChange} required
                   placeholder="Décrivez votre projet en quelques mots..."
                   rows="6"
-                  className="w-full bg-white/5 border border-white/10 rounded-[2rem] p-6 outline-none focus:border-red-500 transition-colors"
+                  className="w-full bg-white/5 border border-white/10 rounded-[2rem] p-6 outline-none focus:border-red-500 transition-colors text-white"
                 />
               </div>
 
               <button 
                 type="submit"
-                className="group w-full py-5 bg-white text-black font-black rounded-full flex items-center justify-center gap-3 hover:bg-red-600 hover:text-white transition-all uppercase tracking-tighter"
+                disabled={isSubmitting}
+                className={`group w-full py-5 font-black rounded-full flex items-center justify-center gap-3 transition-all uppercase tracking-tighter ${
+                  isSubmitting ? 'bg-gray-700 cursor-not-allowed text-gray-400' : 'bg-white text-black hover:bg-red-600 hover:text-white'
+                }`}
               >
-                Envoyer le Briefing <FaPaperPlane className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                {isSubmitting ? 'Envoi en cours...' : 'Envoyer le Briefing'} 
+                {isSubmitting ? <FaSpinner className="animate-spin" /> : <FaPaperPlane className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
               </button>
             </form>
           </div>

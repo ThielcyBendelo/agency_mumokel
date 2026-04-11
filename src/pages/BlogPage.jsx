@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import NavbarSecured from '../components/NavbarSecured';
-import FAQSection from '../components/FAQSection';
+import FAQ from '../components/FAQ';
 import Footer from '../components/Footer';
 
 const articles = [
@@ -221,7 +221,7 @@ export default function BlogPage() {
         </AnimatePresence>
       </main>
 
-      <FAQSection />
+      <FAQ/>
       <Footer />
     </div>
   );
