@@ -3,13 +3,13 @@ import { MapPin, Phone, Mail, Clock } from 'lucide-react'; // Installez lucide-r
 
 function GoogleMapsSection() {
   return (
-    <section className="py-20 px-6 bg-slate-50" id="localisation">
+    <section className="py-20 px-6 bg-[#0a0a0c] text-white" id="localisation">
       <div className="max-w-6xl mx-auto">
         
         {/* En-tête avec un style plus moderne */}
         <div className="mb-12 text-left border-l-4 border-blue-600 pl-6">
-          <h2 className="text-4xl font-black text-slate-900 tracking-tight">
-            NOTRE <span className="text-blue-600">SIÈGE</span>
+          <h2 className="text-4xl md:text-6xl font-black leading-none uppercase italic tracking-tighter">
+            NOTRE <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-purple-500">SIÈGE</span>
           </h2>
           <p className="text-gray-500 mt-2 max-w-xl">
             Venez discuter de vos projets digitaux dans nos bureaux à Kinshasa. 
@@ -21,9 +21,9 @@ function GoogleMapsSection() {
           
           {/* Colonne Infos - Prend 1/3 de l'espace */}
           <div className="lg:col-span-1 space-y-4">
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+            <div className="bg-transparent p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-blue-50 rounded-lg text-blue-600">
+                <div className="p-3 bg-transparent rounded-lg text-blue-600">
                   <MapPin size={24} />
                 </div>
                 <div>
@@ -35,9 +35,9 @@ function GoogleMapsSection() {
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+            <div className="bg-transparent p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-blue-50 rounded-lg text-blue-600">
+                <div className="p-3 bg-transparent rounded-lg text-blue-600">
                   <Phone size={24} />
                 </div>
                 <div>
@@ -48,7 +48,7 @@ function GoogleMapsSection() {
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 bg-blue-600 text-white">
+            <div className="bg-transparent p-6 rounded-2xl shadow-sm border border-slate-100 bg-blue-600 text-white">
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-white/20 rounded-lg">
                   <Clock size={24} />
@@ -63,7 +63,7 @@ function GoogleMapsSection() {
           </div>
 
           {/* Colonne Carte - Prend 2/3 de l'espace */}
-          <div className="lg:col-span-2 relative group">
+          <div className="bg-transparent lg:col-span-2 relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
             <div className="relative h-full min-h-[400px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
               <iframe

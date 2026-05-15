@@ -104,9 +104,9 @@ export default function BlogPage() {
 
       <NavbarSecured />
       
-      <header className="bg-white border-b border-gray-100 py-16">
+      <header className="bg-[#0a0a0c] text-white border-b border-gray-100 py-24">
         <div className="container mx-auto px-6 text-center">
-          <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-4xl md:text-5xl font-light text-slate-900 mb-4 uppercase tracking-tighter italic">
+          <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-4xl md:text-5xl font-light text-white mb-4 uppercase tracking-tighter italic">
             Perspectives & <span className="font-bold text-red-600 not-italic">Actualités</span>
           </motion.h1>
         </div>

@@ -44,12 +44,12 @@ const OffersPage = () => {
   ];
 
   const offers = [
-    { id: 1, title: 'Pack Starter', subtitle: 'Idéal pour débuter', price: '299€', originalPrice: '399€', color: 'from-blue-500 to-cyan-500', icon: <FaCode />, features: ['Site Web (5 pages)', 'SEO de base', 'Hébergement 1 mois', 'SSL Gratuit', 'Formation admin'], popular: false },
-    { id: 2, title: 'Pack Business', subtitle: 'Pour les entreprises en croissance', price: '599€', originalPrice: '799€', color: 'from-green-500 to-emerald-500', icon: <FaChartLine />, features: ['10 pages premium', 'E-commerce intégré', 'Support 3 mois', 'SEO Avancé', 'Maintenance'], popular: true },
-    { id: 3, title: 'Pack Enterprise', subtitle: 'Solution complète grands comptes', price: '999€', originalPrice: '1299€', color: 'from-purple-500 to-pink-500', icon: <FaCloud />, features: ['Pages illimitées', 'API personnalisées', 'Support 24/7', 'Audit performance', 'Cloud dédié'], popular: false },
-    { id: 4, title: 'Pack Sécurité', subtitle: 'Protection maximale des données', price: '800€', originalPrice: '1000€', color: 'from-red-500 to-orange-500', icon: <FaShieldAlt />, features: ['Audit de sécurité', 'Protection DDoS', 'Firewall avancé', 'Monitoring 24/7', 'Sauvegarde chiffrée'], popular: false },
-    { id: 5, title: 'Pack Développement', subtitle: 'Applications sur mesure', price: '1500€', originalPrice: '1800€', color: 'from-indigo-500 to-blue-500', icon: <FaCog />, features: ['App Web sur mesure', 'Architecture scalable', 'CI/CD Pipeline', 'Documentation technique', 'Tests auto'], popular: false },
-    { id: 6, title: 'Pack Innovation', subtitle: 'IA et technologies avancées', price: '2000€', originalPrice: '2500€', color: 'from-yellow-500 to-red-500', icon: <FaBrain />, features: ['Intégration IA', 'Machine Learning', 'Big Data Analytics', 'Automatisation process', 'R&D dédiée'], popular: false }
+    { id: 1, title: 'Pack Starter', subtitle: 'Idéal pour débuter', price: '600$', originalPrice: '800$', color: 'from-blue-500 to-cyan-500', icon: <FaCode />, features: ['Site Web (5 pages)', 'SEO de base', 'Hébergement 1 mois', 'SSL Gratuit', 'Formation admin'], popular: false },
+    { id: 2, title: 'Pack Business', subtitle: 'Pour les entreprises en croissance', price: '1000$', originalPrice: '1200$', color: 'from-green-500 to-emerald-500', icon: <FaChartLine />, features: ['10 pages premium', 'E-commerce intégré', 'Support 3 mois', 'SEO Avancé', 'Maintenance'], popular: true },
+    { id: 3, title: 'Pack Enterprise', subtitle: 'Solution complète grands comptes', price: '1200$', originalPrice: '1500$', color: 'from-purple-500 to-pink-500', icon: <FaCloud />, features: ['Pages illimitées', 'API personnalisées', 'Support 24/7', 'Audit performance', 'Cloud dédié'], popular: false },
+    { id: 4, title: 'Pack Sécurité', subtitle: 'Protection maximale des données', price: '800$', originalPrice: '1000$', color: 'from-red-500 to-orange-500', icon: <FaShieldAlt />, features: ['Audit de sécurité', 'Protection DDoS', 'Firewall avancé', 'Monitoring 24/7', 'Sauvegarde chiffrée'], popular: false },
+    { id: 5, title: 'Pack Développement', subtitle: 'Applications sur mesure', price: '2000$', originalPrice: '2500$', color: 'from-indigo-500 to-blue-500', icon: <FaCog />, features: ['App Web sur mesure', 'Architecture scalable', 'CI/CD Pipeline', 'Documentation technique', 'Tests auto'], popular: false },
+    { id: 6, title: 'Pack Innovation', subtitle: 'IA et technologies avancées', price: '2500$', originalPrice: '3000€', color: 'from-yellow-500 to-red-500', icon: <FaBrain />, features: ['Intégration IA', 'Machine Learning', 'Big Data Analytics', 'Automatisation process', 'R&D dédiée'], popular: false }
   ];
 
   return (

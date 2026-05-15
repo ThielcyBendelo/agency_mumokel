@@ -58,13 +58,20 @@ export default function About() {
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-purple-500">Technologique</span>
               </h1>
               <p className="text-xl text-gray-400 leading-relaxed font-light">
-                Initié par <span className="text-white font-medium">Mr Thielcy BENDELO BOKUNGU</span> et <span className="text-white font-medium">Mr Christian ILUNGA TSHIANYI</span>, 
-                MUAMOKEL est née de l'ambition de léguer un héritage numérique moderne à la future génération en République Démocratique du Congo.
-              </p>
-              <p className="text-gray-400 leading-relaxed">
-                Nous accompagnons les entreprises dans leur transformation digitale avec une approche méthodique : 
-                de la définition des besoins à la livraison finale, en garantissant une conformité absolue aux attentes initiales.
-              </p>
+  Initié par une synergie d'ingénieurs passionnés, 
+  <span className="text-white font-medium"> MUAMOKEL</span> est née de l'ambition de bâtir un écosystème technologique d'excellence et de léguer un héritage numérique moderne à la future génération en République Démocratique du Congo.
+</p>
+<p className="text-gray-400 leading-relaxed">
+  Véritable partenaire stratégique, nous propulsons la transformation digitale des entreprises et institutions grâce à une ingénierie logicielle rigoureuse : du conseil architectural à la livraison de solutions sécurisées, scalables et parfaitement alignées sur vos défis métiers.
+</p>
+<p className="text-gray-400 leading-relaxed">
+  Notre force repose sur une culture d'innovation continue et d'agilité technologique. En combinant la maîtrise du Cloud, de l'Intelligence Artificielle et du développement sur-mesure, nous concevons des infrastructures résilientes prêtes à soutenir la croissance de nos clients dans un marché en perpétuelle mutation.
+</p>
+<p className="text-gray-400 leading-relaxed">
+  Au-delà des lignes de code, nous investissons activement dans le capital humain local. À travers nos projets, nous formons et intégrons les meilleurs talents tech de la RDC, créant ainsi une passerelle solide entre l'excellence académique et les exigences de l'industrie logicielle internationale.
+</p>
+
+
             </motion.div>
 
             {/* GRILLE D'EXPERTISE (Cards) */}

@@ -17,14 +17,28 @@ export default function Footer() {
           
           {/* Section Branding (5 colonnes) */}
           <div className="md:col-span-5 space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-black text-xl">MA</span>
-              </div>
-              <span className="text-2xl font-black text-white tracking-tighter uppercase italic">
-                Muamokel<span className="text-red-500">.Tech</span>
-              </span>
-            </div>
+  <Link to="/" className="flex items-center gap-3 group select-none">
+    {/* Icône Tech Géométrique */}
+    <div className="relative w-10 h-10 bg-slate-900 border border-red-500/30 rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(239,68,68,0.1)] overflow-hidden transition-all duration-300 group-hover:border-red-500 group-hover:shadow-[0_0_20px_rgba(239,68,68,0.25)]">
+      {/* Effet de reflet en arrière-plan au survol */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-red-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* Monogramme épuré */}
+      <span className="relative font-bold text-sm tracking-widest text-white group-hover:scale-105 transition-transform duration-300">
+        M<span className="text-red-500 font-black">A</span>
+      </span>
+    </div>
+
+    {/* Texte de marque rééquilibré */}
+    <div className="flex flex-col justify-center leading-none">
+      <span className="text-lg font-bold tracking-tight text-white transition-colors duration-300 group-hover:text-red-400">
+        MUAMOKEL
+      </span>
+      <span className="text-[10px] font-medium tracking-[0.25em] text-slate-400 uppercase mt-0.5">
+        DEVELOPPEMENT
+      </span>
+    </div>
+  </Link>
+
             <p className="text-sm leading-relaxed max-w-sm">
               Ingénierie logicielle de pointe et solutions digitales sur mesure. 
               Nous bâtissons les infrastructures de demain avec une rigueur absolue.

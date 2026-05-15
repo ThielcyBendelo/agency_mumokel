@@ -5,13 +5,56 @@ import Footer from '../components/Footer';
 
 export default function TeamPage() {
   const teamMembers = [
-    { id: 1, name: 'Christ Ilunga', role: 'Ingénieur en réseaux système  & Associé', image: '/IrChrist.jpg', skills: ['Strategie', 'Innovation'], color: 'from-red-600 to-red-400' },
-    { id: 2, name: 'Emmanuel', role: 'CTO & Lead Dev', image: '/IrEmma.jpg', skills: ['Cloud', 'Architecture'], color: 'from-blue-600 to-cyan-400' },
-    { id: 3, name: 'Merveille Tech', role: 'UI/UX Designer', image: '/IrMerveille.jpg', skills: ['Figma', 'Product Design'], color: 'from-pink-600 to-purple-400' },
-    { id: 4, name: 'Thielcy Bendelo', role: 'Ingénieur Logiciel & Associé', image: '/Irbendelo.jpg', skills: ['Node.js', 'React'], color: 'from-emerald-600 to-teal-400' },
-    { id: 5, name: 'Louiscar Ingeba', role: 'Chargé Relation Publique et maintenance', image: '/ChargéRP.jpg', skills: ['CI/CD', 'Docker'], color: 'from-orange-600 to-amber-400' },
-    { id: 8, name: 'Essy Bendelo', role: 'Cyber Expert', image: '/muamokel2.png', skills: ['Pentest', 'Audit'], color: 'from-indigo-600 to-purple-400' },
+    { 
+      id: 1, 
+      name: 'Christ ILUNGA', 
+      role: 'Ingénieur en réseaux système & Associé', 
+      image: '/IrChristian.jpeg', 
+      skills: ['Réseaux', 'Administration Système', 'Sécurité'], 
+      color: 'from-red-600 to-red-400' 
+    },
+    { 
+      id: 2, 
+      name: 'Emmanuel MPUTU', 
+      role: 'Ingénieur en maintenance système réseaux & Associé', 
+      image: '/IrEmma.jpeg', 
+      skills: ['Cloud Computing', 'Maintenance IT', 'Architecture'], 
+      color: 'from-blue-600 to-cyan-400' 
+    },
+    { 
+      id: 3, 
+      name: 'Merveille SUKA', 
+      role: 'UI/UX Designer & Associé', 
+      image: '/IrMerveille.jpg', 
+      skills: ['Figma', 'UI/UX Design', 'Prototypage'], 
+      color: 'from-pink-600 to-purple-400' 
+    },
+    { 
+      id: 4, 
+      name: 'Thielcy BENDELO', 
+      role: 'Ingénieur Logiciel principal & Associé', 
+      image: '/bendelo.jpeg', 
+      skills: ['React.js', 'Node.js', 'Architecture Web'], 
+      color: 'from-emerald-600 to-teal-400' 
+    },
+    { 
+      id: 5, 
+      name: 'Louiscar INGEBA', 
+      role: 'Chargé Relation Publique & Associé', 
+      image: '/Louisc.jpeg', 
+      skills: ['Communication', 'Stratégie Client', 'Marketing Tech'], 
+      color: 'from-orange-600 to-amber-400' 
+    },
+    { 
+      id: 8, 
+      name: 'Christian ', 
+      role: 'Ingénieur en intelligence artificielle et Data science & Associé', 
+      image: '/IrZap.jpeg', 
+      skills: ['Machine Learning', 'Data Science', 'Python IA'], 
+      color: 'from-indigo-600 to-purple-400' 
+    },
   ];
+
 
   return (
     <div className="bg-[#0a0a0c] min-h-screen text-white">
@@ -47,7 +90,7 @@ export default function TeamPage() {
               <div className="relative overflow-hidden rounded-[32px] bg-white/[0.02] border border-white/10 p-4 transition-all hover:bg-white/[0.05] hover:border-red-500/30">
                 
                 {/* Image Section avec Glow */}
-                <div className="relative aspect-square overflow-hidden rounded-[24px] mb-6">
+                <div className="relative aspect-square overflow-hidden rounded-[24px] mb-10">
                   <div className={`absolute inset-0 bg-gradient-to-t ${member.color} opacity-0 group-hover:opacity-40 transition-opacity z-10`} />
                   <img 
                     src={member.image} 

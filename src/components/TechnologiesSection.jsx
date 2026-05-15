@@ -4,7 +4,8 @@ import {
   FaReact, FaNodeJs, FaDocker, FaAws, FaShieldAlt, 
   FaJsSquare, FaPython, FaGitAlt 
 } from 'react-icons/fa';
-import { SiTailwindcss, SiMongodb, SiExpress, SiNextdotjs, SiTypescript } from 'react-icons/si';
+import { SiTailwindcss, SiMongodb, SiExpress, SiNextdotjs, SiTypescript, SiKalilinux, SiVirtualbox  } from 'react-icons/si';
+
 
 // Petit composant pour l'effet de compteur numérique
 const Counter = ({ value }) => {
@@ -29,7 +30,30 @@ const technologies = [
   { name: 'Docker', icon: <FaDocker />, color: 'text-[#2496ED]', level: 'Intermédiaire', percentage: 75, desc: 'Conteneurisation' },
   { name: 'AWS', icon: <FaAws />, color: 'text-[#FF9900]', level: 'Intermédiaire', percentage: 70, desc: 'Infrastructure Cloud' },
   { name: 'CyberSec', icon: <FaShieldAlt />, color: 'text-red-500', level: 'Expert', percentage: 94, desc: 'Sécurité & Audit' },
+    { 
+    name: 'Kali Linux', 
+    icon: <SiKalilinux />, 
+    color: 'text-cyan-500', 
+    level: 'Expert', 
+    percentage: 92, 
+    desc: 'Audits de Sécurité & Pentesting' 
+  },
+  { 
+    name: 'VirtualBox', 
+    icon: <SiVirtualbox />, 
+    color: 'text-sky-500', 
+    level: 'Avancé', 
+    percentage: 88, 
+    desc: 'Virtualisation d’environnements' 
+  },
 ];
+
+
+
+
+ 
+
+
 
 export default function Technologies() {
   return (

@@ -98,7 +98,6 @@ const App = () => {
             draggable
             pauseOnHover
           />
-          <ThemeSwitcher />
           <ContactQuickButton />
 
           <Routes>

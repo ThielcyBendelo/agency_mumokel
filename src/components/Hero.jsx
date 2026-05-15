@@ -76,36 +76,39 @@ export default function Hero() {
           </p>
         </AnimatedSection>
 
-        {/* Boutons d'Action (Style Neobrutalisme Soft) */}
-        <AnimatedSection variant="fadeIn" delay={0.8}>
-          <div className="flex flex-wrap gap-4"> {/* Assurez-vous que la div parente est ouverte */}
-  
-  {/* Bouton "Start a Project" -> Vers la page Contact ou Devis */}
-  <Link to="/contact">
-    <motion.button
-      whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(220, 38, 38, 0.4)" }}
-      whileTap={{ scale: 0.98 }}
-      className="px-10 py-5 bg-red-600 text-white font-black rounded-sm flex items-center gap-3 uppercase tracking-widest text-xs transition-all shadow-xl shadow-red-600/20"
-    >
-      Start a Project <FaChevronRight className="text-[10px]" />
-    </motion.button>
-  </Link>
+                {/* Boutons d'Action (Style Neobrutalisme Soft) */}
+        {/* Ajout d'une marge basse importante (mb-20) pour détacher les boutons de la grille */}
+        <AnimatedSection variant="fadeIn" delay={0.8} className="mb-20">
+          {/* gap-6 au lieu de gap-4 pour donner de l'air aux boutons sur mobile */}
+          <div className="flex flex-wrap justify-center sm:justify-start gap-6"> 
+            
+            {/* Bouton "Start a Project" */}
+            <Link to="/contact">
+              <motion.button
+                whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(220, 38, 38, 0.4)" }}
+                whileTap={{ scale: 0.98 }}
+                className="px-10 py-5 bg-red-600 text-white font-black rounded-sm flex items-center gap-4 uppercase tracking-widest text-xs transition-all shadow-xl shadow-red-600/20"
+              >
+                Start a Project <FaChevronRight className="text-[10px]" />
+              </motion.button>
+            </Link>
 
-  {/* Bouton "Explore Stack" -> Vers la page Offres ou Technologie */}
-  <Link to="/offers">
-    <motion.button
-      whileHover={{ backgroundColor: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255,255,255,0.4)' }}
-      whileTap={{ scale: 0.98 }}
-      className="px-10 py-5 bg-transparent border border-white/10 text-white font-black rounded-sm uppercase tracking-widest text-xs backdrop-blur-md transition-all"
-    >
-      Explore Stack
-    </motion.button>
-  </Link>
-</div>
+            {/* Bouton "Explore Stack" */}
+            <Link to="/offers">
+              <motion.button
+                whileHover={{ backgroundColor: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255,255,255,0.4)' }}
+                whileTap={{ scale: 0.98 }}
+                className="px-10 py-5 bg-transparent border border-white/10 text-white font-black rounded-sm uppercase tracking-widest text-xs backdrop-blur-md transition-all"
+              >
+                Explore Stack
+              </motion.button>
+            </Link>
+          </div>
         </AnimatedSection>
 
-        {/* Features Grid (Architecture de cartes plus propre) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-5xl mx-auto">
+        {/* Features Grid (Architecture aérée et Responsive) */}
+        {/* Modifié : grid-cols-1 par défaut sur mobile, 2 sur tablette (sm), 4 sur ordinateur (lg). Gaps plus larges. */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-6xl mx-auto mt-16 px-4">
           {features.map((feature, i) => (
             <motion.div
               key={i}
@@ -113,21 +116,24 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: feature.delay }}
               whileHover={{ y: -10, borderColor: 'rgba(255,255,255,0.2)' }}
-              className="group p-8 rounded-sm border border-white/5 bg-white/[0.01] backdrop-blur-sm transition-all relative overflow-hidden"
+              className="group p-10 rounded-sm border border-white/5 bg-white/[0.01] backdrop-blur-sm transition-all relative overflow-hidden flex flex-col items-center text-center justify-between min-h-[220px]"
             >
               {/* Effet de brillance au hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               
-              <div className={`w-14 h-14 mx-auto mb-6 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white text-2xl shadow-2xl transform group-hover:rotate-12 transition-transform duration-500`}>
+              {/* Conteneur d'icône avec marge basse augmentée (mb-8) */}
+              <div className={`w-16 h-16 mx-auto mb-8 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white text-3xl shadow-2xl transform group-hover:rotate-12 transition-transform duration-500`}>
                 <feature.icon />
               </div>
-              <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] group-hover:text-white transition-colors">
+              
+              {/* Texte de la feature espacé de l'icône */}
+              <span className="text-[11px] font-black text-gray-400 uppercase tracking-[0.25em] group-hover:text-white transition-colors block w-full mt-auto">
                 {feature.text}
               </span>
             </motion.div>
           ))}
         </div>
-      </div>
+      </div> {/* Fermeture de la div principale */}
 
       {/* Indicateur de Scroll discret */}
       <motion.div 
