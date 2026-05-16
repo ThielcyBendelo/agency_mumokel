@@ -27,8 +27,8 @@ function GoogleMapsSection() {
                   <MapPin size={24} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-800">Adresse</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <h3 className="font-bold text-white">Adresse</h3>
+                  <p className="text-sm text-white leading-relaxed">
                     Avenue Kimwenza A/A25,<br />Kinshasa, RD Congo
                   </p>
                 </div>
@@ -41,9 +41,9 @@ function GoogleMapsSection() {
                   <Phone size={24} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-800">Contact</h3>
-                  <p className="text-sm text-gray-600">+243 82 90 54 350</p>
-                  <p className="text-sm text-gray-600">servicebanamokeli@gmail.com</p>
+                  <h3 className="font-bold text-white">Contact</h3>
+                  <p className="text-sm text-white">+243 82 90 54 350</p>
+                  <p className="text-sm text-white">servicebanamokeli@gmail.com</p>
                 </div>
               </div>
             </div>
