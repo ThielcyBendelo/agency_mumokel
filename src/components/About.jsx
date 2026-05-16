@@ -69,7 +69,24 @@ export default function About() {
 </p>
 <p className="text-gray-400 leading-relaxed">
   Au-delà des lignes de code, nous investissons activement dans le capital humain local. À travers nos projets, nous formons et intégrons les meilleurs talents tech de la RDC, créant ainsi une passerelle solide entre l'excellence académique et les exigences de l'industrie logicielle internationale.
+</p><p className="text-gray-400 leading-relaxed border-t border-gray-800 pt-6 mt-6">
+  Pourquoi <span className="text-white font-medium">MUAMOKEL</span> ? Parce que chaque ligne de code doit porter une âme. La racine de notre nom est un pont entre l'histoire et l'éternité : <span className="text-white font-medium">MUAMOKE</span> incarne le <span className="text-gray-300 italic">"Muana Mokeli"</span> du Lingala et de la tradition Kongo — affirmant que nous sommes les enfants et les prolongements technologiques du Créateur unique. Le <span className="text-white font-medium">L</span> final scelle notre <span className="text-gray-300 italic">"Legacy"</span>, notre devoir de transmission. Nous portons ce nom pour rappeler à la RDC et au monde que la technologie n'est pas une simple compétence humaine, mais une restitution de l'ordre céleste, une science sacrée destinée à élever notre nation vers son plus haut niveau d'excellence.
 </p>
+
+<div className="flex flex-wrap gap-3 pt-6 mt-4">
+  <span className="px-4 py-1.5 text-xs font-semibold tracking-wider text-cyan-400 uppercase bg-cyan-950/40 border border-cyan-800/50 rounded-full backdrop-blur-sm">
+    #MuanaMokeli
+  </span>
+  <span className="px-4 py-1.5 text-xs font-semibold tracking-wider text-purple-400 uppercase bg-purple-950/40 border border-purple-800/50 rounded-full backdrop-blur-sm">
+    #KongoLegacy
+  </span>
+  <span className="px-4 py-1.5 text-xs font-semibold tracking-wider text-amber-400 uppercase bg-amber-950/40 border border-amber-800/50 rounded-full backdrop-blur-sm">
+    #DivineArchitecture
+  </span>
+  <span className="px-4 py-1.5 text-xs font-semibold tracking-wider text-gray-300 uppercase bg-gray-900 border border-gray-800 rounded-full">
+    #TechCongo243
+  </span>
+</div>
 
 
             </motion.div>
