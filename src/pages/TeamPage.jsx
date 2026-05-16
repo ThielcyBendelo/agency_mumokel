@@ -46,11 +46,19 @@ export default function TeamPage() {
       color: 'from-orange-600 to-amber-400' 
     },
     { 
-      id: 8, 
-      name: 'Christian ', 
+      id: 6, 
+      name: 'Christian AZIPENZA ', 
       role: 'Ingénieur en intelligence artificielle et Data science & Associé', 
       image: '/IrZap.jpeg', 
       skills: ['Machine Learning', 'Data Science', 'Python IA'], 
+      color: 'from-indigo-600 to-purple-400' 
+    },
+    { 
+      id: 7, 
+      name: 'Nono  ', 
+      role: 'Administrateur de cybersécurité & Associé', 
+      image: '/nono.jpeg', 
+      skills: ['SecOps', 'Gestion des réseaux & infrastructures', 'DevSecOps'], 
       color: 'from-indigo-600 to-purple-400' 
     },
   ];

@@ -14,7 +14,7 @@ export default function About() {
   const expertises = [
     { title: "Expertise & Spécialisations", icon: <FaCode />, items: ["React, Node.js, Next.js", "UI/UX Design", "Intégration API"] },
     { title: "Cloud & Sécurité", icon: <FaShieldAlt />, items: ["Cybersécurité & Audit", "AWS, Azure, Docker", "CI/CD & DevOps"] },
-    { title: "Expériences", icon: <FaCloud />, items: ["+50 projets livrés", "Clients Internationaux", "SaaS & E-commerce"] },
+    { title: "Expériences", icon: <FaCloud />, items: ["+ projets livrés", "Clients Internationaux", "SaaS & E-commerce"] },
     { title: "Valeurs", icon: <FaUsers />, items: ["Transparence", "Agilité (Scrum)", "Innovation continue"] }
   ];
 
